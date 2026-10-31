@@ -45,7 +45,13 @@ jobs:
 
       - name: Switch to ad-hoc code signing (no Apple developer certificate on CI)
         working-directory: app/macos
-        run: sed -i '' 's/CODE_SIGN_IDENTITY = "Apple Development";/CODE_SIGN_IDENTITY = "-";/' Runner.xcodeproj/project.pbxproj
+        run: |
+          sed -i '' \
+            -e '/"CODE_SIGN_IDENTITY\[sdk=macosx\*\]"/d' \
+            -e 's/CODE_SIGN_IDENTITY = "[^"]*";/CODE_SIGN_IDENTITY = "-";/' \
+            -e 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/' \
+            -e '/DEVELOPMENT_TEAM = /d' \
+            Runner.xcodeproj/project.pbxproj
 
       - name: Build macOS
         working-directory: app

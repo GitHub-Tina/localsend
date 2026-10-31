@@ -1,3 +1,7 @@
+## Unreleased
+
+- fix(macos): prevent intermittent MissingPluginException during startup (@ShlomoCode)
+
 ## 1.18.2 (2026-08-21)
 
 - feat: drag and drop files into the "Receive via link" browser page

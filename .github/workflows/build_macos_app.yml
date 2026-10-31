@@ -59,8 +59,8 @@ jobs:
 
       - name: Package
         run: |
-          cd app/build/macos/Build/Products/Release
-          ditto -c -k --sequesterRsrc --keepParent LocalSend.app "LocalSend-${{ steps.get_version.outputs.version }}-macos-arm64.zip"
+          cd "$GITHUB_WORKSPACE/app/build/macos/Build/Products/Release"
+          ditto -c -k --sequesterRsrc --keepParent LocalSend.app "$GITHUB_WORKSPACE/LocalSend-${{ steps.get_version.outputs.version }}-macos-arm64.zip"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v6

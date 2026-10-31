@@ -57,6 +57,9 @@ jobs:
         working-directory: app
         run: flutter build macos --release
 
+      - name: Re-sign ad-hoc (fix LaunchAtLoginHelper seal broken by build phase)
+        run: codesign --force --deep -s - app/build/macos/Build/Products/Release/LocalSend.app
+
       - name: Package
         run: |
           cd "$GITHUB_WORKSPACE/app/build/macos/Build/Products/Release"
